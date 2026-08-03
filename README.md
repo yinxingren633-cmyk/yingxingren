@@ -578,4 +578,3 @@ Your Markdown file is ready
 
 *若本指南对你有所帮助，欢迎点个 🌟 **Star** 支持一下！*
 
-```
