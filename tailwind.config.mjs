@@ -11,6 +11,18 @@ export default {
           card: 'rgba(18, 18, 22, 0.75)',
           border: 'rgba(255, 255, 255, 0.08)',
         },
+        wandor: {
+          dark: '#0a0a0a',
+          text: '#1a1a1a',
+          muted: '#767676',
+          prompt: '#905831',
+        },
+        invisible: {
+          dark: '#0a0a0a',
+          text: '#1a1a1a',
+          muted: '#767676',
+          prompt: '#905831',
+        },
         cyan: {
           accent: '#00f2fe',
           glow: 'rgba(0, 242, 254, 0.35)',
@@ -20,15 +32,8 @@ export default {
         }
       },
       fontFamily: {
-        sans: [
-          '-apple-system',
-          'BlinkMacSystemFont',
-          '"Segoe UI"',
-          'Roboto',
-          '"Helvetica Neue"',
-          'Arial',
-          'sans-serif'
-        ],
+        sans: ['Geist', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+        display: ['"Special Elite"', 'serif'],
       },
     },
   },

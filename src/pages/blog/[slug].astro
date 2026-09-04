@@ -17,7 +17,7 @@ const { Content, headings } = await post.render();
 const relatedPosts = allPosts
   .filter((p) => p.slug !== post.slug)
   .map((p) => {
-    const commonTags = p.data.tags.filter((t) => post.data.tags.includes(t)).length;
+    const commonTags = p.data.tags.filter((t: string) => post.data.tags.includes(t)).length;
     return { post: p, commonTags };
   })
   .sort((a, b) => {

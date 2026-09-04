@@ -1,8 +1,8 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Search from '../components/Search.astro';
 import BlogCard from '../components/BlogCard.astro';
+import LiquidGlassHero from '../components/LiquidGlassHero.tsx';
 
 // 获取所有文章，按发布时间倒序排列
 const allPosts = await getCollection('blog');
@@ -16,50 +16,18 @@ const allTags = [...new Set(allPosts.flatMap((p) => p.data.tags))];
 ---
 
 <BaseLayout
-  title="隐形人 - 2026 高性能网络加速与跨境技术教程博客"
+  title="隐形人 (Invisibles) — 极速·隐秘·自由 | 科技技术博客"
   description="隐形人 (yinxingren.homes) 专注于为您提供 2026 最新 Clash 配置教程、美区 Apple ID 注册教学、IEPL 专线梯子方案横向评测与安全出海实操指南。"
   keywords="Clash 配置教程, 美区 Apple ID 注册, 网络加速节点优化, 梯子方案对比, 机场推荐替代选型, 便宜机场, 安全机场, 科学上网, 翻墙出海, 全球加速"
+  hideHeader={true}
 >
-  <!-- 首屏 Hero 区域 -->
-  <section class="relative py-16 md:py-24 text-center px-4 overflow-hidden border-b border-white/5 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(0,242,254,0.15),rgba(255,255,255,0))]">
-    <div class="max-w-4xl mx-auto space-y-6">
-      <!-- 官方卡通吉祥物形象展示 -->
-      <div class="inline-flex items-center justify-center p-2 rounded-3xl bg-zinc-900/80 border border-white/10 shadow-2xl shadow-cyan-500/10 mb-2">
-        <img src="/logo.png" alt="隐形人 Mascot Logo" width="64" height="64" loading="eager" class="w-16 h-16 rounded-2xl object-contain bg-white" />
-      </div>
+  <!-- 视频液态玻璃 Liquid Glass Hero 区域 -->
+  <LiquidGlassHero client:load tags={allTags} />
 
-      <div class="inline-block px-3.5 py-1 rounded-full bg-cyan-400/10 border border-cyan-400/30 text-cyan-400 text-xs font-semibold tracking-wider uppercase">
-        2026 跨境技术 · 隐私安全 · 节点调优指南
-      </div>
-
-      <h1 class="text-3xl md:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight">
-        探索无界网络<br />
-        <span class="bg-gradient-to-r from-cyan-400 via-blue-400 to-indigo-400 bg-clip-text text-transparent">
-          专业实用技术教程与出海指南
-        </span>
-      </h1>
-
-      <p class="text-sm md:text-base text-zinc-400 max-w-2xl mx-auto leading-relaxed">
-        告别网络拥堵与配置困扰。我们为您提供一线极客撰写的免信用卡美区账号申请、Clash Verge Rev 智能分流规则与企业级 IEPL 专线测评。
-      </p>
-
-      <!-- 搜索栏组件 -->
-      <Search />
-
-      <!-- 热门技术长尾词直达胶囊 -->
-      <div class="flex flex-wrap items-center justify-center gap-2 pt-2">
-        <span class="text-xs text-zinc-400">🔥 热门专题：</span>
-        {allTags.map((tag) => (
-          <a
-            href={`/tags/${encodeURIComponent(tag)}`}
-            class="px-3 py-1 rounded-full bg-zinc-900 border border-white/10 hover:border-cyan-400/40 text-zinc-300 hover:text-cyan-400 text-xs transition-all"
-          >
-            #{tag}
-          </a>
-        ))}
-      </div>
-    </div>
-  </section>
+  <!-- 隐藏备用全局搜索输入挂载点 (供 Hero 实时驱动) -->
+  <div class="hidden">
+    <input type="text" id="search-input" />
+  </div>
 
   <!-- 核心置顶指南 (Sticky Featured Guides) -->
   {featuredPosts.length > 0 && (

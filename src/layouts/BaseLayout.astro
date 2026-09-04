@@ -13,9 +13,11 @@ export interface Props {
   pubDate?: Date;
   updatedDate?: Date;
   author?: string;
+  hideHeader?: boolean;
 }
 
 const props = Astro.props;
+const { hideHeader = false } = props;
 ---
 
 <!DOCTYPE html>
@@ -23,6 +25,10 @@ const props = Astro.props;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Google Fonts: Geist & Special Elite -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Geist:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <SEO {...props} />
     <style is:global>
       html {
@@ -46,7 +52,7 @@ const props = Astro.props;
     </style>
   </head>
   <body class="min-h-screen flex flex-col bg-black text-zinc-200">
-    <Header />
+    {!hideHeader && <Header />}
     <main class="flex-grow">
       <slot />
     </main>

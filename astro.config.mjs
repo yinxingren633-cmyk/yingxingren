@@ -1,6 +1,7 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import tailwind from '@astrojs/tailwind';
+import react from '@astrojs/react';
 
 // https://astro.build/config
 export default defineConfig({
@@ -12,6 +13,7 @@ export default defineConfig({
 
   // 3. 集成插件
   integrations: [
+    react(),
     // Tailwind CSS 集成
     tailwind({
       // 应用基础样式
@@ -50,6 +52,13 @@ export default defineConfig({
     shikiConfig: {
       theme: 'one-dark-pro',
       wrap: true,
+    },
+  },
+
+  // 5. Vite 依赖优化
+  vite: {
+    ssr: {
+      noExternal: ['lucide-react'],
     },
   },
 });
