@@ -9,6 +9,7 @@
     "build": "astro check && astro build",
     "postbuild": "node scripts/generate-sitemap.mjs && node scripts/submit-indexnow.mjs",
     "submit-indexnow": "node scripts/submit-indexnow.mjs",
+    "seo-audit": "node scripts/seo-audit.mjs",
     "preview": "astro preview",
     "astro": "astro"
   },
