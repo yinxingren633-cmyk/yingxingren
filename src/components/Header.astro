@@ -25,9 +25,18 @@ const navLinks = [
 <!-- 主导航栏 (极简白毛玻璃 Liquid Glass) -->
 <header class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-black/5 transition-all">
   <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-    <!-- 品牌 Logo + invisible 标题 -->
-    <a href="/" class="flex items-center gap-3 no-underline">
-      <img src="/logo.png" alt="Logo" class="w-8 h-8 object-contain flex-shrink-0" />
+    <!-- 品牌 Logo + invisible 标题 (含 SVG 回退) -->
+    <a href="/" class="flex items-center gap-3 no-underline group">
+      <!-- Attempt to render logo.png; fallback gracefully to inline SVG if missing -->
+      <img 
+        src="/logo.png" 
+        alt="Logo" 
+        class="w-8 h-8 object-contain flex-shrink-0"
+        onerror="this.onerror=null; this.style.display='none'; this.nextElementSibling.style.display='block';"
+      />
+      <svg class="w-8 h-8 text-black hidden flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+      </svg>
       <span class="font-display text-[36px] max-md:text-[28px] text-black leading-none select-none">invisible</span>
     </a>
 
