@@ -126,6 +126,20 @@ export const LiquidGlassHero: React.FC<LiquidGlassHeroProps> = ({ tags = [] }) =
 
       {/* 4. Hero Body & Liquid Glass Search / Prompt Card */}
       <div className="relative z-10 flex flex-col items-center px-6 pt-16 pb-24 text-center my-auto">
+        {/* Brand Logo directly above headline */}
+        <div className="flex justify-center mb-6">
+          <img 
+            src="/logo.png" 
+            alt="隐形人 Logo" 
+            className="w-16 h-16 md:w-20 md:h-20 object-contain drop-shadow-md"
+            onError={(e) => {
+              const target = e.currentTarget;
+              target.onerror = null;
+              target.src = 'https://api.iconify.design/lucide:shield-check.svg';
+            }}
+          />
+        </div>
+
         {/* Headline */}
         <h1 className="font-sans text-[clamp(40px,6vw,68px)] font-medium text-wandor-text leading-[1.05] tracking-[-0.04em] max-w-[820px] mb-5">
           隐形人 (Invisibles) — 极速·隐秘·自由
