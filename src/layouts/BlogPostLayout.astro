@@ -33,7 +33,7 @@ const readingTimeMinutes = Math.max(1, Math.ceil(wordCount / 350));
   author={author}
 >
   <!-- 顶部文章面包屑 -->
-  <div class="border-b border-white/5 bg-zinc-950/40 py-3">
+  <nav aria-label="Breadcrumb" class="border-b border-white/5 bg-zinc-950/40 py-3">
     <div class="max-w-4xl mx-auto px-4 text-xs text-zinc-400 flex items-center gap-2">
       <a href="/" class="hover:text-cyan-400 transition-colors">首页</a>
       <span>/</span>
@@ -41,9 +41,9 @@ const readingTimeMinutes = Math.max(1, Math.ceil(wordCount / 350));
       <span>/</span>
       <span class="text-zinc-200 truncate max-w-xs">{title}</span>
     </div>
-  </div>
+  </nav>
 
-  <div class="max-w-4xl mx-auto px-4 py-10 md:py-16">
+  <article class="max-w-4xl mx-auto px-4 py-10 md:py-16">
     <!-- 文章头部 Header -->
     <header class="mb-10 text-center md:text-left space-y-4">
       <div class="flex flex-wrap items-center gap-2 justify-center md:justify-start text-xs">
@@ -67,13 +67,13 @@ const readingTimeMinutes = Math.max(1, Math.ceil(wordCount / 350));
           <span class="text-zinc-200 font-medium">{author}</span>
         </span>
         <span>•</span>
-        <span>📅 发布时间：{formattedDate}</span>
+        <span>📅 发布时间：<time datetime={formattedDate}>{formattedDate}</time></span>
         <span>•</span>
         <span>⏱️ 阅读时间：约 {readingTimeMinutes} 分钟 ({wordCount} 字)</span>
         {formattedUpdate && (
           <>
             <span>•</span>
-            <span class="text-cyan-400">🔄 最近修订：{formattedUpdate}</span>
+            <span class="text-cyan-400">🔄 最近修订：<time datetime={formattedUpdate}>{formattedUpdate}</time></span>
           </>
         )}
       </div>
@@ -138,5 +138,5 @@ const readingTimeMinutes = Math.max(1, Math.ceil(wordCount / 350));
         </div>
       </section>
     )}
-  </div>
+  </article>
 </BaseLayout>
