@@ -1,0 +1,14 @@
+User-agent: *
+Allow: /
+
+# Explicit rules for major search engines
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+Sitemap: https://yinxingren.homes/sitemap-index.xml

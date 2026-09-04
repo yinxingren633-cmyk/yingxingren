@@ -1,0 +1,116 @@
+---
+export interface Props {
+  title: string;
+  description: string;
+  canonical?: string;
+  image?: string;
+  type?: 'website' | 'article';
+  pubDate?: Date | string;
+  updatedDate?: Date | string;
+  author?: string;
+  keywords?: string[] | string;
+  noindex?: boolean;
+}
+
+const {
+  title,
+  description,
+  canonical = Astro.url.href,
+  image = '/logo.png', // 默认使用用户指定的萌系吉祥物 Logo
+  type = 'website',
+  pubDate,
+  updatedDate,
+  author = 'Invisible Admin',
+  keywords = [],
+  noindex = false,
+} = Astro.props;
+
+// 确保关键字格式为 string[]
+const keywordList: string[] = Array.isArray(keywords)
+  ? keywords
+  : typeof keywords === 'string'
+  ? keywords.split(',').map((k) => k.trim()).filter(Boolean)
+  : [];
+
+// 确保图片路径为绝对 URL
+const siteUrl = Astro.site ? Astro.site.origin : Astro.url.origin;
+const formattedImage = image.startsWith('http') ? image : `${siteUrl}${image.startsWith('/') ? '' : '/'}${image}`;
+
+// 格式化 ISO 日期
+const isoPubDate = pubDate ? new Date(pubDate).toISOString() : undefined;
+const isoUpdatedDate = updatedDate ? new Date(updatedDate).toISOString() : isoPubDate;
+
+// 动态构建 Schema.org JSON-LD 结构化数据
+const schemaData = type === 'article'
+  ? {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": title,
+      "description": description,
+      "image": [formattedImage],
+      "datePublished": isoPubDate,
+      "dateModified": isoUpdatedDate,
+      "author": {
+        "@type": "Person",
+        "name": author
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Invisible Blog",
+        "logo": {
+          "@type": "ImageObject",
+          "url": `${siteUrl}/logo.png`
+        }
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": canonical
+      }
+    }
+  : {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": title,
+      "url": canonical,
+      "description": description
+    };
+---
+
+<!-- 基础 Meta 标签 -->
+<title>{title}</title>
+<meta name="description" content={description} />
+{keywordList.length > 0 && <meta name="keywords" content={keywordList.join(', ')} />}
+<link rel="canonical" href={canonical} />
+{noindex && <meta name="robots" content="noindex, nofollow" />}
+
+<!-- Open Graph (Facebook / WeChat / Telegram) -->
+<meta property="og:type" content={type} />
+<meta property="og:url" content={canonical} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={formattedImage} />
+<meta property="og:site_name" content="Invisible Blog" />
+
+{type === 'article' && isoPubDate && (
+  <meta property="article:published_time" content={isoPubDate} />
+)}
+{type === 'article' && isoUpdatedDate && (
+  <meta property="article:modified_time" content={isoUpdatedDate} />
+)}
+{type === 'article' && author && (
+  <meta property="article:author" content={author} />
+)}
+
+<!-- Twitter Cards -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:url" content={canonical} />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={formattedImage} />
+
+<!-- 站点 Favicon 与苹果触摸图标 -->
+<link rel="icon" href="/logo.png" type="image/png" />
+<link rel="apple-touch-icon" href="/logo.png" />
+
+<!-- JSON-LD 结构化数据 (Bing & Google SEO 核心) -->
+<script type="application/ld+json" is:inline set:html={JSON.stringify(schemaData)} />

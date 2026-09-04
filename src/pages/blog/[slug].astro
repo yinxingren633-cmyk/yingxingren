@@ -1,0 +1,30 @@
+---
+import { getCollection } from 'astro:content';
+import BlogPostLayout from '../../layouts/BlogPostLayout.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post, allPosts: posts },
+  }));
+}
+
+const { post, allPosts } = Astro.props;
+const { Content, headings } = await post.render();
+
+// 计算推荐相关文章（根据相同 tags 排序匹配）
+const relatedPosts = allPosts
+  .filter((p) => p.slug !== post.slug)
+  .map((p) => {
+    const commonTags = p.data.tags.filter((t) => post.data.tags.includes(t)).length;
+    return { post: p, commonTags };
+  })
+  .sort((a, b) => b.commonTags - a.commonTags)
+  .slice(0, 2)
+  .map((item) => item.post);
+---
+
+<BlogPostLayout post={post} headings={headings} relatedPosts={relatedPosts}>
+  <Content />
+</BlogPostLayout>

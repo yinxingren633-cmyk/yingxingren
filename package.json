@@ -1,0 +1,26 @@
+{
+  "name": "yinxingren-blog",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "隐形人 - 2026 高性能网络加速与跨境技术教程博客",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro check && astro build",
+    "postbuild": "node scripts/generate-sitemap.mjs && node scripts/submit-indexnow.mjs",
+    "submit-indexnow": "node scripts/submit-indexnow.mjs",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.9.4",
+    "@astrojs/sitemap": "^3.2.1",
+    "@astrojs/tailwind": "^5.1.5",
+    "astro": "^4.16.18",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5.7.3"
+  },
+  "devDependencies": {
+    "@tailwindcss/typography": "^0.5.16"
+  }
+}

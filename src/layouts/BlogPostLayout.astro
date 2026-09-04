@@ -1,0 +1,154 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import BaseLayout from './BaseLayout.astro';
+import TOC from '../components/TOC.astro';
+
+export interface Props {
+  post: CollectionEntry<'blog'>;
+  headings: { depth: number; slug: string; text: string }[];
+  relatedPosts: CollectionEntry<'blog'>[];
+}
+
+const { post, headings, relatedPosts } = Astro.props;
+const { title, description, pubDate, updatedDate, author, tags, keywords, heroImage } = post.data;
+
+const formattedDate = pubDate.toISOString().split('T')[0];
+const formattedUpdate = updatedDate ? updatedDate.toISOString().split('T')[0] : null;
+const formattedKeywords = Array.isArray(keywords) ? keywords.join(', ') : (keywords || tags.join(', '));
+
+// 预估阅读时间计算 (基于中文与英文词频)
+const wordCount = post.body.length;
+const readingTimeMinutes = Math.max(1, Math.ceil(wordCount / 350));
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  keywords={formattedKeywords}
+  type="article"
+  image={heroImage}
+  pubDate={pubDate}
+  updatedDate={updatedDate}
+  author={author}
+>
+  <!-- 顶部文章面包屑 -->
+  <div class="border-b border-white/5 bg-zinc-950/40 py-3">
+    <div class="max-w-4xl mx-auto px-4 text-xs text-zinc-400 flex items-center gap-2">
+      <a href="/" class="hover:text-cyan-400 transition-colors">首页</a>
+      <span>/</span>
+      <a href="/#tutorials" class="hover:text-cyan-400 transition-colors">博客教程</a>
+      <span>/</span>
+      <span class="text-zinc-200 truncate max-w-xs">{title}</span>
+    </div>
+  </div>
+
+  <div class="max-w-4xl mx-auto px-4 py-10 md:py-16">
+    <!-- 文章头部 Header -->
+    <header class="mb-10 text-center md:text-left space-y-4">
+      <div class="flex flex-wrap items-center gap-2 justify-center md:justify-start text-xs">
+        {tags.map((tag) => (
+          <a
+            href={`/tags/${encodeURIComponent(tag)}`}
+            class="px-2.5 py-1 rounded-full bg-cyan-400/10 border border-cyan-400/20 text-cyan-400 font-medium hover:bg-cyan-400/20 transition-colors"
+          >
+            #{tag}
+          </a>
+        ))}
+      </div>
+
+      <h1 class="text-2xl md:text-4xl font-extrabold text-white tracking-tight leading-tight">
+        {title}
+      </h1>
+
+      <div class="flex flex-wrap items-center justify-center md:justify-start gap-4 text-xs text-zinc-400 pt-2 border-t border-white/5">
+        <span class="flex items-center gap-1.5">
+          <span>✍️ 作者：</span>
+          <span class="text-zinc-200 font-medium">{author}</span>
+        </span>
+        <span>•</span>
+        <span>📅 发布时间：{formattedDate}</span>
+        <span>•</span>
+        <span>⏱️ 阅读时间：约 {readingTimeMinutes} 分钟 ({wordCount} 字)</span>
+        {formattedUpdate && (
+          <>
+            <span>•</span>
+            <span class="text-cyan-400">🔄 最近修订：{formattedUpdate}</span>
+          </>
+        )}
+      </div>
+    </header>
+
+    <!-- 移动端 TOC 大纲 -->
+    <div class="mb-8 block md:hidden">
+      <TOC headings={headings} />
+    </div>
+
+    <!-- 文章正文区域与桌面端目录 -->
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+      <div class="md:col-span-3">
+        <div class="prose prose-invert prose-cyan max-w-none prose-headings:scroll-mt-24 prose-headings:text-white prose-p:text-zinc-300 prose-p:leading-relaxed prose-a:text-cyan-400 hover:prose-a:text-cyan-300 prose-code:text-cyan-300 prose-pre:bg-zinc-900 prose-pre:border prose-pre:border-white/10 rounded-2xl">
+          <slot />
+        </div>
+
+        <!-- 正文底部行动提示 -->
+        <div class="mt-12 p-6 rounded-2xl bg-gradient-to-r from-zinc-900 via-zinc-900/90 to-zinc-950 border border-cyan-500/20 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div class="space-y-1 text-center sm:text-left">
+            <h4 class="font-bold text-white text-base">需要稳定高速的 2026 企业级 IEPL 专线网络？</h4>
+            <p class="text-xs text-zinc-400">全节点 1 倍率扣费，4K 秒开，支持全平台客户端一键导入。</p>
+          </div>
+          <a
+            href="https://yinxingren1.invisibleaff.com/#/register?code=Gcp1CRso"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="px-5 py-2.5 rounded-full bg-cyan-400 text-black text-xs font-bold hover:bg-cyan-300 transition-colors whitespace-nowrap shadow-lg shadow-cyan-500/20"
+          >
+            获取专属节点 →
+          </a>
+        </div>
+      </div>
+
+      <!-- 桌面端侧边栏 TOC -->
+      <aside class="hidden md:block md:col-span-1">
+        <div class="sticky top-24 space-y-6">
+          <TOC headings={headings} />
+
+          <!-- 侧边栏长尾词推荐 -->
+          <div class="p-5 rounded-2xl bg-zinc-900/40 border border-white/5 text-xs space-y-3">
+            <div class="font-semibold text-white">热门分类检索</div>
+            <div class="flex flex-col gap-1.5 text-zinc-400">
+              <a href="/tags/Clash%20配置教程" class="hover:text-cyan-400">⚡ Clash Verge 配置</a>
+              <a href="/tags/美区%20Apple%20ID%20注册" class="hover:text-cyan-400">🍏 美区 Apple ID 注册</a>
+              <a href="/tags/梯子方案对比" class="hover:text-cyan-400">📊 IEPL 专线对比</a>
+              <a href="/tags/网络加速节点优化" class="hover:text-cyan-400">🛡️ DNS 防泄漏设置</a>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- 相关文章推荐 (SEO 内部拓扑环流) -->
+    {relatedPosts.length > 0 && (
+      <section class="mt-16 pt-12 border-t border-white/10">
+        <h3 class="text-xl font-bold text-white mb-6 flex items-center gap-2">
+          <span>📚</span>
+          <span>相关技术教程推荐</span>
+        </h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {relatedPosts.map((rel) => (
+            <a
+              href={`/blog/${rel.slug}`}
+              class="p-5 rounded-2xl bg-zinc-900/50 border border-white/10 hover:border-cyan-400/30 hover:bg-zinc-900 transition-all block group"
+            >
+              <div class="text-xs text-cyan-400 mb-1.5">
+                {rel.data.tags[0] ? `#${rel.data.tags[0]}` : '技术教程'}
+              </div>
+              <h4 class="font-semibold text-white group-hover:text-cyan-400 text-sm line-clamp-2 leading-snug">
+                {rel.data.title}
+              </h4>
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
+  </div>
+</BaseLayout>

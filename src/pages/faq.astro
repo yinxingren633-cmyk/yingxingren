@@ -1,0 +1,101 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const faqs = [
+  {
+    q: "为什么需要注册美区 Apple ID？国区账号有什么限制？",
+    a: "国区 App Store 因政策要求下架了所有海外网络代理与网络加速应用（包括 Shadowrocket、Loon、Quantumult X 等），且无法下载跨国 AI 办公软件（如官方 ChatGPT、Claude、TikTok 等）。注册属于个人的美区 Apple ID 是长期稳定管理与更新这些工具的最佳解决方案。"
+  },
+  {
+    q: "什么是企业级 IEPL 专线？与普通中转有什么区别？",
+    a: "IEPL（International Ethernet Private Line）是电信运营商物理隔离的内网跨境专线。流量在专用光缆中点对点传输，不经过公共互联网国际出口，因此没有 GFW 审查与 QoS 限速，具备 0 丢包、超低抖动与晚高峰 4K 秒开的绝对稳定性。"
+  },
+  {
+    q: "新手应该选择 Clash Verge Rev 还是 Sing-box？",
+    a: "如果您偏好图形化界面友好、分流规则生态成熟，优先选择 Clash Verge Rev；如果您注重移动端省电、低内存占用以及支持最新协议（Hysteria 2/Reality），Sing-box 是更极客的现代化选择。"
+  },
+  {
+    q: "如何防止翻墙时的真实 IP 与 DNS 泄漏？",
+    a: "建议在客户端中开启 Fake-IP 模式并配置 DoH 加密 DNS，同时在浏览器中关闭 WebRTC 穿透漏洞。服务端建议选择具备无盘内存运行（RAM-Only）架构的加速服务商，杜绝服务器硬盘记录任何历史会话日志。"
+  },
+  {
+    q: "客户端导入订阅后提示连接超时（Network Timeout）如何排查？",
+    a: "常见原因包括：1. 本地系统时间与网络标准时间不一致（差值超过 60 秒会导致加密握手失败，请开启自动同步网络时间）；2. 本地杀毒软件或防火墙拦截了客户端 TUN 虚拟网卡服务；3. 订阅链接过期，建议重新从服务商后台获取并导入。"
+  }
+];
+
+// 生成 FAQPage Schema 结构化数据
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqs.map((item) => ({
+    "@type": "Question",
+    "name": item.q,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": item.a
+    }
+  }))
+};
+---
+
+<BaseLayout
+  title="常见问题与故障排查解答 (FAQ) - 隐形人网络技术博客"
+  description="针对美区 Apple ID 注册、Clash 客户端规则分流、IEPL 专线网络稳定性及 DNS 泄漏防范的常见问题系统解答。"
+  keywords="科学上网FAQ, Clash常见问题, 美区Apple ID解答, IEPL专线解答, DNS防泄漏"
+>
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(faqSchema)} />
+
+  <div class="max-w-4xl mx-auto px-4 py-16">
+    <div class="text-xs text-zinc-400 mb-6 flex items-center gap-2">
+      <a href="/" class="hover:text-cyan-400">首页</a>
+      <span>/</span>
+      <span class="text-zinc-200">常见问题解答</span>
+    </div>
+
+    <header class="text-center mb-16 space-y-4">
+      <div class="inline-block px-3 py-1 rounded-full bg-cyan-400/10 text-cyan-400 text-xs font-bold uppercase">
+        KNOWLEDGE BASE & FAQ
+      </div>
+      <h1 class="text-3xl md:text-5xl font-extrabold text-white">
+        常见技术问题与排查指南
+      </h1>
+      <p class="text-sm md:text-base text-zinc-400 max-w-xl mx-auto">
+        汇总了跨境出海与客户端调优中最常遇到的技术疑问，助您快速排除网络故障。
+      </p>
+    </header>
+
+    <div class="space-y-4">
+      {faqs.map((faq, index) => (
+        <details class="group rounded-2xl bg-zinc-900/60 border border-white/10 p-6 backdrop-blur-xl transition-all open:bg-zinc-900/90 open:border-cyan-400/30">
+          <summary class="flex justify-between items-center cursor-pointer list-none text-white font-semibold text-base md:text-lg select-none">
+            <span class="flex items-center gap-3">
+              <span class="text-cyan-400 font-mono text-sm">0{index + 1}.</span>
+              <span>{faq.q}</span>
+            </span>
+            <span class="text-cyan-400 text-xl group-open:rotate-45 transition-transform duration-200 ml-4">+</span>
+          </summary>
+          <div class="mt-4 pt-4 border-t border-white/5 text-sm md:text-base text-zinc-400 leading-relaxed">
+            {faq.a}
+          </div>
+        </details>
+      ))}
+    </div>
+
+    <!-- 底部行动卡片 -->
+    <div class="mt-16 p-8 rounded-3xl bg-gradient-to-br from-zinc-900 via-black to-zinc-950 border border-white/10 text-center space-y-4">
+      <h3 class="text-xl font-bold text-white">仍有未解决的网络配置难题？</h3>
+      <p class="text-xs md:text-sm text-zinc-400 max-w-md mx-auto">
+        欢迎查阅我们的深度技术博文，或加入企业级专线网络体验一键配置服务。
+      </p>
+      <div class="pt-2">
+        <a
+          href="/#tutorials"
+          class="px-6 py-2.5 rounded-full bg-cyan-400 text-black text-xs font-bold hover:bg-cyan-300 transition-colors inline-block"
+        >
+          查阅全部实操文章 →
+        </a>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

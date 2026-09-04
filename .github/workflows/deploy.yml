@@ -1,0 +1,54 @@
+name: Build, Deploy & Trigger IndexNow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-indexnow:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Build Astro Site
+        run: npm run build
+        env:
+          SITE_URL: https://yinxingren.homes
+
+      # Step to submit updated sitemap/URLs to Bing IndexNow
+      - name: Submit to Bing IndexNow
+        run: |
+          KEY="b8cefbf031ce42089560d53d606e71ee"
+          HOST="yinxingren.homes"
+          
+          curl -X POST "https://api.indexnow.org/indexnow" \
+            -H "Content-Type: application/json; charset=utf-8" \
+            -d "{
+                  \"host\": \"$HOST\",
+                  \"key\": \"$KEY\",
+                  \"keyLocation\": \"https://$HOST/$KEY.txt\",
+                  \"urlList\": [
+                    \"https://$HOST/\",
+                    \"https://$HOST/blog/clash-setup-guide/\",
+                    \"https://$HOST/blog/us-apple-id-registration/\",
+                    \"https://$HOST/blog/node-selection-optimization/\",
+                    \"https://$HOST/blog/clash-verge-rev-tutorial-2026/\",
+                    \"https://$HOST/blog/us-apple-id-registration-guide/\",
+                    \"https://$HOST/blog/iepl-vs-bgp-accelerator-guide/\",
+                    \"https://$HOST/blog/network-dns-leak-protection/\",
+                    \"https://$HOST/blog/sing-box-cross-platform-config/\",
+                    \"https://$HOST/faq/\"
+                  ]
+                }"
