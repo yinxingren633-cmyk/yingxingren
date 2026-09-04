@@ -7,28 +7,27 @@ export interface Props {
 }
 
 const {
-  title = "??????????????????",
-  description = "???????:??? 1 ???????4K/8K ??????? Clash / Shadowrocket / Sing-box ????,?? IEPL ?????",
-  buttonText = "???? / ???? ?",
+  title = "准备好开启稳定低延迟的极速网络体验了吗？",
+  description = "隐形人专线网络：全节点 1 倍率纯粹计费、4K/8K 视频秒开、支持 Clash / Shadowrocket / Sing-box 一键导入，独享企业级 IEPL 高速通道。",
+  buttonText = "立即登录 / 注册节点 →",
   buttonUrl = "https://yinxingren1.invisibleaff.com/#/register?code=Gcp1CRso"
 } = Astro.props;
 ---
 
-<div class="relative overflow-hidden my-12 p-8 md:p-10 rounded-3xl bg-gradient-to-br from-zinc-900 via-zinc-900 to-zinc-950 border border-cyan-500/30 shadow-2xl shadow-cyan-500/10">
-  <!-- ?????? -->
-  <div class="absolute -right-16 -bottom-16 w-64 h-64 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
-  <div class="absolute -left-16 -top-16 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl pointer-events-none"></div>
+<div class="relative overflow-hidden my-12 p-8 md:p-10 rounded-3xl bg-[#fafafa] border border-gray-100 shadow-sm hover:shadow-md transition-all">
+  <!-- 背景装饰微渐变 -->
+  <div class="absolute -right-16 -bottom-16 w-64 h-64 bg-[#905831]/5 rounded-full blur-3xl pointer-events-none"></div>
 
   <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
     <div class="space-y-3 text-center md:text-left max-w-xl">
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-400/10 border border-cyan-400/20 text-cyan-400 text-xs font-semibold uppercase tracking-wider">
-        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-        <span>2026 ????????????</span>
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#905831]/10 text-[#905831] text-xs font-semibold uppercase tracking-wider">
+        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+        <span>2026 全球高可用节点矩阵已上线</span>
       </div>
-      <h3 class="text-xl md:text-2xl font-black text-white tracking-tight leading-snug">
+      <h3 class="text-xl md:text-2xl font-bold text-[#1a1a1a] tracking-tight leading-snug">
         {title}
       </h3>
-      <p class="text-xs md:text-sm text-zinc-400 leading-relaxed">
+      <p class="text-xs md:text-sm text-[#767676] leading-relaxed">
         {description}
       </p>
     </div>
@@ -38,13 +37,13 @@ const {
         href={buttonUrl}
         target="_blank"
         rel="noopener noreferrer"
-        class="inline-flex items-center justify-center px-7 py-3.5 rounded-full text-sm font-bold text-black bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-cyan-300 hover:to-blue-400 shadow-xl shadow-cyan-500/25 hover:shadow-cyan-500/40 hover:scale-105 active:scale-95 transition-all duration-200"
+        class="inline-flex items-center justify-center px-7 py-3.5 rounded-full text-sm font-medium text-white bg-[#0a0a0a] hover:bg-[#333] shadow-md hover:scale-105 active:scale-95 transition-all duration-200"
       >
         <span>{buttonText}</span>
       </a>
-      <span class="text-[11px] text-zinc-500 flex items-center gap-1">
-        <span>?</span>
-        <span>??? 30 ???????</span>
+      <span class="text-[11px] text-[#767676] flex items-center gap-1">
+        <span>⚡</span>
+        <span>免配置 30 秒快速接入体验</span>
       </span>
     </div>
   </div>

@@ -33,38 +33,38 @@ const readingTimeMinutes = Math.max(1, Math.ceil(wordCount / 350));
   author={author}
 >
   <!-- 顶部文章面包屑 -->
-  <nav aria-label="Breadcrumb" class="border-b border-white/5 bg-zinc-950/40 py-3">
-    <div class="max-w-4xl mx-auto px-4 text-xs text-zinc-400 flex items-center gap-2">
-      <a href="/" class="hover:text-cyan-400 transition-colors">首页</a>
+  <nav aria-label="Breadcrumb" class="border-b border-gray-100 bg-[#fafafa] py-3">
+    <div class="max-w-4xl mx-auto px-6 text-xs text-[#767676] flex items-center gap-2">
+      <a href="/" class="hover:text-[#905831] transition-colors">首页</a>
       <span>/</span>
-      <a href="/#tutorials" class="hover:text-cyan-400 transition-colors">博客教程</a>
+      <a href="/#tutorials" class="hover:text-[#905831] transition-colors">博客教程</a>
       <span>/</span>
-      <span class="text-zinc-200 truncate max-w-xs">{title}</span>
+      <span class="text-[#1a1a1a] truncate max-w-xs">{title}</span>
     </div>
   </nav>
 
-  <article class="max-w-4xl mx-auto px-4 py-10 md:py-16">
+  <article class="max-w-4xl mx-auto px-6 py-10 md:py-16">
     <!-- 文章头部 Header -->
     <header class="mb-10 text-center md:text-left space-y-4">
       <div class="flex flex-wrap items-center gap-2 justify-center md:justify-start text-xs">
         {tags.map((tag: string) => (
           <a
             href={`/tags/${encodeURIComponent(tag)}`}
-            class="px-2.5 py-1 rounded-full bg-cyan-400/10 border border-cyan-400/20 text-cyan-400 font-medium hover:bg-cyan-400/20 transition-colors"
+            class="px-3 py-1 rounded-full bg-gray-100 text-[#767676] hover:bg-[#905831]/10 hover:text-[#905831] font-medium transition-colors"
           >
             #{tag}
           </a>
         ))}
       </div>
 
-      <h1 class="text-2xl md:text-4xl font-extrabold text-white tracking-tight leading-tight">
+      <h1 class="text-2xl md:text-4xl font-bold text-[#1a1a1a] tracking-tight leading-tight">
         {title}
       </h1>
 
-      <div class="flex flex-wrap items-center justify-center md:justify-start gap-4 text-xs text-zinc-400 pt-2 border-t border-white/5">
+      <div class="flex flex-wrap items-center justify-center md:justify-start gap-4 text-xs text-[#767676] pt-2 border-t border-gray-100">
         <span class="flex items-center gap-1.5">
           <span>✍️ 作者：</span>
-          <span class="text-zinc-200 font-medium">{author}</span>
+          <span class="text-[#1a1a1a] font-medium">{author}</span>
         </span>
         <span>•</span>
         <span>📅 发布时间：<time datetime={formattedDate}>{formattedDate}</time></span>
@@ -73,7 +73,7 @@ const readingTimeMinutes = Math.max(1, Math.ceil(wordCount / 350));
         {formattedUpdate && (
           <>
             <span>•</span>
-            <span class="text-cyan-400">🔄 最近修订：<time datetime={formattedUpdate}>{formattedUpdate}</time></span>
+            <span class="text-[#905831]">🔄 最近修订：<time datetime={formattedUpdate}>{formattedUpdate}</time></span>
           </>
         )}
       </div>
@@ -87,7 +87,7 @@ const readingTimeMinutes = Math.max(1, Math.ceil(wordCount / 350));
     <!-- 文章正文区域与桌面端目录 -->
     <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
       <div class="md:col-span-3">
-        <div class="prose prose-invert prose-cyan max-w-none prose-headings:scroll-mt-24 prose-headings:text-white prose-p:text-zinc-300 prose-p:leading-relaxed prose-a:text-cyan-400 hover:prose-a:text-cyan-300 prose-code:text-cyan-300 prose-pre:bg-zinc-900 prose-pre:border prose-pre:border-white/10 rounded-2xl">
+        <div class="prose prose-slate max-w-none prose-headings:scroll-mt-24 prose-headings:text-[#1a1a1a] prose-headings:font-bold prose-p:text-[#4a4a4a] prose-p:leading-relaxed prose-a:text-[#905831] hover:prose-a:underline prose-code:text-[#905831] prose-code:bg-gray-100 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:before:content-none prose-code:after:content-none prose-pre:bg-[#1e1e1e] prose-pre:border prose-pre:border-gray-200 rounded-2xl">
           <slot />
         </div>
 
@@ -101,13 +101,13 @@ const readingTimeMinutes = Math.max(1, Math.ceil(wordCount / 350));
           <TOC headings={headings} />
 
           <!-- 侧边栏长尾词推荐 -->
-          <div class="p-5 rounded-2xl bg-zinc-900/40 border border-white/5 text-xs space-y-3">
-            <div class="font-semibold text-white">热门分类检索</div>
-            <div class="flex flex-col gap-1.5 text-zinc-400">
-              <a href="/tags/Clash%20配置教程" class="hover:text-cyan-400">⚡ Clash Verge 配置</a>
-              <a href="/tags/美区%20Apple%20ID%20注册" class="hover:text-cyan-400">🍏 美区 Apple ID 注册</a>
-              <a href="/tags/梯子方案对比" class="hover:text-cyan-400">📊 IEPL 专线对比</a>
-              <a href="/tags/网络加速节点优化" class="hover:text-cyan-400">🛡️ DNS 防泄漏设置</a>
+          <div class="p-5 rounded-2xl bg-white border border-gray-100 shadow-sm text-xs space-y-3">
+            <div class="font-semibold text-[#1a1a1a]">热门分类检索</div>
+            <div class="flex flex-col gap-2 text-[#767676]">
+              <a href="/tags/Clash%20配置教程" class="hover:text-[#905831] transition-colors">⚡ Clash Verge 配置</a>
+              <a href="/tags/美区%20Apple%20ID%20注册" class="hover:text-[#905831] transition-colors">🍏 美区 Apple ID 注册</a>
+              <a href="/tags/梯子方案对比" class="hover:text-[#905831] transition-colors">📊 IEPL 专线对比</a>
+              <a href="/tags/网络加速节点优化" class="hover:text-[#905831] transition-colors">🛡️ DNS 防泄漏设置</a>
             </div>
           </div>
         </div>
@@ -116,8 +116,8 @@ const readingTimeMinutes = Math.max(1, Math.ceil(wordCount / 350));
 
     <!-- 相关文章推荐 (SEO 内部拓扑环流) -->
     {relatedPosts.length > 0 && (
-      <section class="mt-16 pt-12 border-t border-white/10">
-        <h3 class="text-xl font-bold text-white mb-6 flex items-center gap-2">
+      <section class="mt-16 pt-12 border-t border-gray-100">
+        <h3 class="text-xl font-bold text-[#1a1a1a] mb-6 flex items-center gap-2">
           <span>📚</span>
           <span>相关技术教程推荐</span>
         </h3>
@@ -125,12 +125,12 @@ const readingTimeMinutes = Math.max(1, Math.ceil(wordCount / 350));
           {relatedPosts.map((rel) => (
             <a
               href={`/blog/${rel.slug}`}
-              class="p-5 rounded-2xl bg-zinc-900/50 border border-white/10 hover:border-cyan-400/30 hover:bg-zinc-900 transition-all block group"
+              class="p-5 rounded-2xl bg-white border border-gray-100 shadow-sm hover:shadow-md hover:border-[#905831]/30 transition-all block group"
             >
-              <div class="text-xs text-cyan-400 mb-1.5">
+              <div class="text-xs text-[#905831] font-medium mb-1.5">
                 {rel.data.tags[0] ? `#${rel.data.tags[0]}` : '技术教程'}
               </div>
-              <h4 class="font-semibold text-white group-hover:text-cyan-400 text-sm line-clamp-2 leading-snug">
+              <h4 class="font-semibold text-[#1a1a1a] group-hover:text-[#905831] text-sm line-clamp-2 leading-snug transition-colors">
                 {rel.data.title}
               </h4>
             </a>

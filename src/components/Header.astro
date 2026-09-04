@@ -3,66 +3,54 @@ const navLinks = [
   { name: '首页', href: '/' },
   { name: 'Clash 专栏', href: '/tags/Clash%20配置教程' },
   { name: '美区 Apple ID', href: '/tags/美区%20Apple%20ID%20注册' },
-  { name: '方案深度评测', href: '/tags/梯子方案对比' },
   { name: '节点优化', href: '/tags/网络加速节点优化' },
-  { name: '常见问答 (FAQ)', href: '/faq' },
+  { name: '常见问题 (FAQ)', href: '/faq' },
 ];
 ---
 
-<!-- 顶部 E-E-A-T 状态条 -->
-<div class="bg-black/60 border-b border-white/5 py-1.5 text-xs text-zinc-400 backdrop-blur-md">
-  <div class="max-w-6xl mx-auto px-4 flex flex-wrap justify-between items-center gap-2">
+<!-- 顶部状态小标签 (极简浅色) -->
+<div class="bg-gray-50/80 border-b border-black/5 py-1 text-[11px] text-[#767676]">
+  <div class="max-w-6xl mx-auto px-6 flex flex-wrap justify-between items-center gap-2">
     <div class="flex items-center gap-2">
-      <span class="inline-block w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-      <span class="font-medium text-zinc-300">2026年最新网络节点实测与配置规范</span>
+      <span class="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+      <span class="font-medium text-[#1a1a1a]">2026 最新网络节点实测与官方配置规范</span>
     </div>
-    <div class="flex items-center gap-4 text-zinc-400">
+    <div class="flex items-center gap-4 text-[#767676]">
       <span>🛡️ 经网络架构师安全审计</span>
       <span>🔄 最近更新：2026年9月</span>
     </div>
   </div>
 </div>
 
-<!-- 主导航栏 (毛玻璃苹果设计风格) -->
-<header class="sticky top-0 z-50 bg-black/80 backdrop-blur-xl border-b border-white/10">
-  <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
-    <!-- 品牌区 (应用指定的萌系卡通 Logo) -->
-    <a href="/" class="flex items-center gap-3 group">
-      <img
-        src="/logo.png"
-        alt="隐形人博客 Logo"
-        width="40"
-        height="40"
-        loading="eager"
-        class="w-10 h-10 rounded-xl object-contain bg-white shadow-md border border-white/20 transition-transform group-hover:scale-105"
-      />
-      <div class="flex flex-col">
-        <span class="font-bold text-lg text-white tracking-tight leading-tight">隐形人</span>
-        <span class="text-[10px] text-cyan-400 font-semibold tracking-wider uppercase">Invisible Tech Blog</span>
-      </div>
+<!-- 主导航栏 (极简白毛玻璃 Liquid Glass) -->
+<header class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-black/5 transition-all">
+  <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+    <!-- 品牌 Wordmark (Special Elite) -->
+    <a href="/" class="flex items-center gap-2 group">
+      <span class="font-display text-3xl text-black select-none tracking-tight">invisible</span>
     </a>
 
     <!-- 桌面端菜单导航 -->
-    <nav class="hidden md:flex items-center gap-6 text-sm font-medium">
+    <nav class="hidden md:flex items-center gap-7 text-[15px] font-medium">
       {navLinks.map((item) => (
         <a
           href={item.href}
-          class="text-zinc-400 hover:text-white transition-colors duration-200"
+          class="text-[#1a1a1a] hover:opacity-55 transition-opacity"
         >
           {item.name}
         </a>
       ))}
     </nav>
 
-    <!-- 右侧行动区 (导航/GitHub/高转化CTA) -->
-    <div class="flex items-center gap-3 md:gap-4">
-      <!-- GitHub 仓库图标链接 -->
+    <!-- 右侧行动区 (GitHub 图标 + 行动按钮) -->
+    <div class="flex items-center gap-4">
+      <!-- GitHub 仓库图标链接 (w-6 h-6) -->
       <a
         href="https://github.com/yinxingren633-cmyk/yingxingren"
         target="_blank"
         rel="noopener noreferrer"
         aria-label="GitHub Repository"
-        class="p-1.5 text-zinc-400 hover:text-white hover:bg-white/10 rounded-full transition-all flex items-center justify-center"
+        class="p-1 text-black hover:opacity-60 transition-opacity flex items-center justify-center"
         title="View on GitHub"
       >
         <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
@@ -70,14 +58,14 @@ const navLinks = [
         </svg>
       </a>
 
-      <!-- 高显眼度主要转化 CTA -->
+      <!-- 登录 / 注册专线 CTA 按钮 -->
       <a
         href="https://yinxingren1.invisibleaff.com/#/register?code=Gcp1CRso"
         target="_blank"
         rel="noopener noreferrer"
-        class="inline-flex items-center gap-1.5 px-4 md:px-5 py-2 rounded-full text-xs font-bold text-black bg-gradient-to-r from-cyan-400 via-sky-400 to-blue-500 shadow-md shadow-cyan-500/25 hover:shadow-cyan-500/40 hover:scale-105 active:scale-95 transition-all duration-200"
+        class="bg-[#0a0a0a] text-white rounded-full px-5 py-2 text-sm font-medium hover:bg-[#333] active:scale-95 transition-all shadow-sm"
       >
-        <span>⚡ 登录 / 注册节点</span>
+        <span>登录 / 注册节点</span>
       </a>
     </div>
   </div>

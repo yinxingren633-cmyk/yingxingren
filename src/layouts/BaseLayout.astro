@@ -21,7 +21,7 @@ const { hideHeader = false } = props;
 ---
 
 <!DOCTYPE html>
-<html lang="zh-CN" class="dark bg-black text-zinc-100 antialiased selection:bg-cyan-500 selection:text-black">
+<html lang="zh-CN" class="bg-white text-[#1a1a1a] antialiased selection:bg-[#905831]/20 selection:text-[#905831]">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -34,24 +34,24 @@ const { hideHeader = false } = props;
       html {
         scroll-behavior: smooth;
       }
-      /* 自定义滚动条 */
+      /* 优雅浅色滚动条 */
       ::-webkit-scrollbar {
         width: 8px;
         height: 8px;
       }
       ::-webkit-scrollbar-track {
-        background: #09090b;
+        background: #f4f4f5;
       }
       ::-webkit-scrollbar-thumb {
-        background: #27272a;
+        background: #d4d4d8;
         border-radius: 9999px;
       }
       ::-webkit-scrollbar-thumb:hover {
-        background: #3f3f46;
+        background: #a1a1aa;
       }
     </style>
   </head>
-  <body class="min-h-screen flex flex-col bg-black text-zinc-200">
+  <body class="bg-white text-[#1a1a1a] font-sans antialiased min-h-screen flex flex-col">
     {!hideHeader && <Header />}
     <main class="flex-grow">
       <slot />
