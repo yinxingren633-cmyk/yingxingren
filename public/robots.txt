@@ -1,6 +1,25 @@
 User-agent: *
 Allow: /
 
+# Disallow aggressive crawlers, scraper bots and search spammers
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: BLEXBot
+Disallow: /
+
+User-agent: DataForSeoBot
+Disallow: /
+
 # Explicit rules for major search engines
 User-agent: Googlebot
 Allow: /
@@ -9,6 +28,12 @@ User-agent: Bingbot
 Allow: /
 
 User-agent: Applebot
+Allow: /
+
+User-agent: YandexBot
+Allow: /
+
+User-agent: Baiduspider
 Allow: /
 
 Sitemap: https://yinxingren.homes/sitemap-index.xml

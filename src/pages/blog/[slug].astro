@@ -13,15 +13,20 @@ export async function getStaticPaths() {
 const { post, allPosts } = Astro.props;
 const { Content, headings } = await post.render();
 
-// 计算推荐相关文章（根据相同 tags 排序匹配）
+// 计算推荐相关文章（根据相同 tags 排序匹配，优先展示同标签深度文章）
 const relatedPosts = allPosts
   .filter((p) => p.slug !== post.slug)
   .map((p) => {
     const commonTags = p.data.tags.filter((t) => post.data.tags.includes(t)).length;
     return { post: p, commonTags };
   })
-  .sort((a, b) => b.commonTags - a.commonTags)
-  .slice(0, 2)
+  .sort((a, b) => {
+    if (b.commonTags !== a.commonTags) {
+      return b.commonTags - a.commonTags;
+    }
+    return b.post.data.pubDate.valueOf() - a.post.data.pubDate.valueOf();
+  })
+  .slice(0, 4)
   .map((item) => item.post);
 ---
 

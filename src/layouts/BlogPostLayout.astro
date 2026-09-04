@@ -2,6 +2,7 @@
 import type { CollectionEntry } from 'astro:content';
 import BaseLayout from './BaseLayout.astro';
 import TOC from '../components/TOC.astro';
+import CallToAction from '../components/CallToAction.astro';
 
 export interface Props {
   post: CollectionEntry<'blog'>;
@@ -90,21 +91,8 @@ const readingTimeMinutes = Math.max(1, Math.ceil(wordCount / 350));
           <slot />
         </div>
 
-        <!-- 正文底部行动提示 -->
-        <div class="mt-12 p-6 rounded-2xl bg-gradient-to-r from-zinc-900 via-zinc-900/90 to-zinc-950 border border-cyan-500/20 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div class="space-y-1 text-center sm:text-left">
-            <h4 class="font-bold text-white text-base">需要稳定高速的 2026 企业级 IEPL 专线网络？</h4>
-            <p class="text-xs text-zinc-400">全节点 1 倍率扣费，4K 秒开，支持全平台客户端一键导入。</p>
-          </div>
-          <a
-            href="https://yinxingren1.invisibleaff.com/#/register?code=Gcp1CRso"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="px-5 py-2.5 rounded-full bg-cyan-400 text-black text-xs font-bold hover:bg-cyan-300 transition-colors whitespace-nowrap shadow-lg shadow-cyan-500/20"
-          >
-            获取专属节点 →
-          </a>
-        </div>
+        <!-- 正文底部高转化行动邀请组件 (Reusable CallToAction) -->
+        <CallToAction />
       </div>
 
       <!-- 桌面端侧边栏 TOC -->
